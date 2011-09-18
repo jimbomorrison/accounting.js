@@ -238,6 +238,18 @@ var accounting = (function () {
 	}
 
 
+	function formatLength(number, precision){
+		var symbols = ['','K','M','B'];
+		var base	= 1000; // Could be 1024 for bytes, kilobytes etc
+		for ( e = 0; e <= 4; e ++ ){
+			test = (number / Math.pow(base,e));
+			if ( test <= base ){
+				return formatNumber( test, precision ) + symbols[e];
+			}
+		}
+	}
+
+
 	/**
 	 * Format a number into currency
 	 * 
@@ -357,6 +369,7 @@ var accounting = (function () {
 		formatMoney: formatMoney,
 		formatNumber: formatNumber,
 		formatColumn: formatColumn,
+		formatLength: formatLength,
 		toFixed: toFixed,
 		unformat: unformat
 	};
