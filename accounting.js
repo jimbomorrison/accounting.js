@@ -244,18 +244,18 @@ var accounting = (function () {
 	 */
 	function formatLength(number,precision){
 		// Some example vars:
-		var   	base = 1000,
-				units 		= ['K', 'M', 'B', 'TR'],
-				unit;
+		var   	base 	= 1000,
+				units 	= ['K', 'M', 'B', 'TR'],
+				unit 	= '';
 		
 		// Divide number by base until it's smaller than base or has reached the largest unit
-		while ( num > base && units.length ) {
-			num /= base; 			// divide number by base
+		while ( number > base && units.length ) {
+			number /= base; 			// divide number by base
 			unit = units.shift(); 	// get next unit
 		}
 		
 		// The result:
-		return.formatNumber(number, precision) + unit);  // "92.62K"
+		return formatNumber(number, precision) + unit;  // "92.62K"
 
 	}
 	
