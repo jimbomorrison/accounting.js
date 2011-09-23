@@ -238,16 +238,46 @@ var accounting = (function () {
 	}
 
 
-	function formatLength(number, precision){
-		var symbols = ['','K','M','B'];
-		var base	= 1000; // Could be 1024 for bytes, kilobytes etc
+	/**
+	 *	FormatLength (FormatBytes?)
+	 *	Provided by Joss (I didn't write this one!)
+	 */
+	function formatLength(number,precision){
+		// Some example vars:
+		var   	base = 1000,
+				units 		= ['K', 'M', 'B', 'TR'],
+				unit;
+		
+		// Divide number by base until it's smaller than base or has reached the largest unit
+		while ( num > base && units.length ) {
+			num /= base; 			// divide number by base
+			unit = units.shift(); 	// get next unit
+		}
+		
+		// The result:
+		return.formatNumber(number, precision) + unit);  // "92.62K"
+
+	}
+	
+	/**
+	 *	FormatLength (FormatBytes?)
+	 *	Jimbo's original :-)
+	 */
+	/*
+	function formatLength_J(number){
+		var symbols 	= ['','','K','M','B'];
+		var precisions 	= [2 ,2 ,1  ,1  ,1  ];
+		var base		= 1000; // Could be 1024 for bytes, kilobytes etc
 		for ( e = 0; e <= 4; e ++ ){
-			test = (number / Math.pow(base,e));
+			test 		= (number / Math.pow(base,e-1));
+			precision	= precisions[e];
 			if ( test <= base ){
-				return formatNumber( test, precision ) + symbols[e];
+				return formatNumber( (number / Math.pow(base,  Math.max(0,e-1) )), precision ) + symbols[e];
 			}
 		}
 	}
+	*/
+	
 
 
 	/**
